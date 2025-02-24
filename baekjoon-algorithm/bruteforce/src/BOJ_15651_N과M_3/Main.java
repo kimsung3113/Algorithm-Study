@@ -28,9 +28,7 @@ public class Main {
         } else {
             for (int cand = 1; cand <= N; cand++) {
                 // k 번째에 cand 가 올 수 있으면
-                selected[k] = cand; // selected[2] -> 2 , selected[2] -> 3, selected[2] -> 4 selected[2] -> 0
-                // selected[1] = 2 , selected[2] = 1, selected[2] = 2, selected[2] = 3, selected[2] = 4 selected[2] -> 0
-                // k+1 번부터 M 번까지 잘 채워주는 함수를 호출해준다.
+                selected[k] = cand;
                 rec_func(k + 1);
                 System.out.println("selected array 표시 : " + Arrays.toString(selected));
                 selected[k] = 0;
