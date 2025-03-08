@@ -29,10 +29,25 @@ public class Main {
             for (int cand = 1; cand <= N; cand++) {
                 // k 번째에 cand 가 올 수 있으면
                 selected[k] = cand;
+                System.out.println("selected array 표시 : " + Arrays.toString(selected) + ", k의 값 : " + k + ", cand 값 : " + cand);
                 rec_func(k + 1);
-                System.out.println("selected array 표시 : " + Arrays.toString(selected));
                 selected[k] = 0;
             }
+        }
+    }
+
+    static void customRecFunc(int n, int m, int param) {
+
+        if(param == m+1){
+            for (int i = 1; i <= m; i++) sb.append(selected[i]).append(' ');
+            sb.append('\n');
+        }else{
+            for(int i = 1; i <= n; i++) {
+                selected[param] = i;
+                customRecFunc(n,m, param + 1);
+                selected[param] = 0;
+            }
+
         }
     }
 
@@ -40,7 +55,8 @@ public class Main {
         input();
 
         // 1 번째 원소부터 M 번째 원소를 조건에 맞는 모든 방법을 찾아줘
-        rec_func(1);
+        //rec_func(1);
+        customRecFunc(N, M, 1);
         System.out.println(sb.toString());
     }
 
