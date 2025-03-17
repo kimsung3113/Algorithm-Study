@@ -1,4 +1,4 @@
-package BOJ_10819_차이를_최대로;
+package BOJ_10974_모든_순열;
 
 import java.io.*;
 import java.util.StringTokenizer;
@@ -8,33 +8,25 @@ public class Main {
 
     static void input() {
         FastReader scan = new FastReader();
-        M = scan.nextInt();
-        max = Integer.MIN_VALUE;
-        nums = new int[M + 1];
-        String [] tokens = scan.nextLine().split(" ");
-        for(int i = 1; i <= M; i++) {
-            nums[i] = Integer.parseInt(tokens[i-1]);
-        }
-        selected = new int[M + 1];
-        used = new int[M + 1];
+        N = scan.nextInt();
+        selected = new int[N + 1];
+        used = new int[N + 1];
     }
 
-    static int M , max;
-    static int[] selected, nums, used;
+    static int N;
+    static int[] selected, used;
 
     // Recurrence Function (재귀 함수)
     static void rec_func(int k) {
-        if (k == M + 1) { // 절대값의 최대값 구하기!
-            int sum = 0;
-            for (int i = 1; i < M; i++) sum += Math.abs(selected[i] - selected[i+1]);
-
-            max = Math.max(max, sum);
+        if (k == N + 1) {
+            for (int i = 1; i <= N; i++) sb.append(selected[i]).append(" ");
+            sb.append('\n');
         } else {
-            for (int cand = 1; cand <= M; cand++) {
+            for (int cand = 1; cand <= N; cand++) {
 
                 if(used[cand] == 1) continue;
 
-                selected[k] = nums[cand]; used[cand] = 1;
+                selected[k] = cand; used[cand] = 1;
                 rec_func(k + 1);
                 selected[k] = 0; used[cand] = 0;
             }
@@ -44,10 +36,8 @@ public class Main {
 
     public static void main(String[] args) {
         input();
-
-        // 1 번째 원소부터 M 번째 원소를 조건에 맞는 모든 방법을 찾아줘
         rec_func(1);
-        System.out.println(max);
+        System.out.println(sb.toString());
     }
 
 
